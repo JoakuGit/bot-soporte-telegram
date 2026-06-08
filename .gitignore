@@ -1,0 +1,11 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# La base se crea automaticamente al iniciar el proyecto.
+data/*.db
+!data/.gitkeep
