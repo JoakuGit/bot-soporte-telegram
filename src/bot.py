@@ -1,5 +1,6 @@
 """Bot de Telegram para gestionar tickets de soporte tecnico nivel 1."""
 
+import asyncio
 import logging
 import os
 
@@ -318,7 +319,7 @@ async def _handle_ticket_query(update: Update, telegram_id: str, text: str) -> N
     await _show_main_menu(update, response)
 
 
-async def main() -> None:
+def main() -> None:
     """Punto de entrada del bot."""
     load_dotenv()
     token = os.getenv("BOT_TOKEN")
@@ -334,10 +335,9 @@ async def main() -> None:
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
     logger.info("Bot de soporte iniciado.")
-    await application.run_polling()
+    asyncio.set_event_loop(asyncio.new_event_loop())
+    application.run_polling()
 
 
 if __name__ == "__main__":
-    import asyncio
-
-    asyncio.run(main())
+    main()
